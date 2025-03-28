@@ -27,6 +27,7 @@ class DatabaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//        var_dump(5);
         Model::setConnectionResolver($this->app['db']);
 
         Model::setEventDispatcher($this->app['events']);
@@ -66,6 +67,7 @@ class DatabaseServiceProvider extends ServiceProvider
         // connections might be managed. It also implements the connection resolver
         // interface which may be used by other components requiring connections.
         $this->app->singleton('db', function ($app) {
+//            var_dump(4);
             return new DatabaseManager($app, $app['db.factory']);
         });
 

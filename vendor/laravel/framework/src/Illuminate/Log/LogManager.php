@@ -70,6 +70,7 @@ class LogManager implements LoggerInterface
      */
     public function stack(array $channels, $channel = null)
     {
+        dd('stack');
         return new Logger(
             $this->createStackDriver(compact('channels', 'channel')),
             $this->app['events']
@@ -163,6 +164,8 @@ class LogManager implements LoggerInterface
      */
     protected function createEmergencyLogger()
     {
+        //dd('createEmergencyLogger');
+
         $config = $this->configurationFor('emergency');
 
         $handler = new StreamHandler(
@@ -256,14 +259,18 @@ class LogManager implements LoggerInterface
      */
     protected function createSingleDriver(array $config)
     {
-        return new Monolog($this->parseChannel($config), [
+        $a = new Monolog($this->parseChannel($config), [
             $this->prepareHandler(
-                new StreamHandler(
+               $b = new StreamHandler(
                     $config['path'], $this->level($config),
                     $config['bubble'] ?? true, $config['permission'] ?? null, $config['locking'] ?? false
                 ), $config
             ),
         ]);
+        var_dump('$a', $a, $a->test(), 'bbbbbbbbb',$b);
+        return $a;
+
+        dd('createSingleDriver', $a->test());
     }
 
     /**

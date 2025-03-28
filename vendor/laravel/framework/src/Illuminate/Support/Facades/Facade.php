@@ -194,6 +194,14 @@ abstract class Facade
             return static::$resolvedInstance[$name];
         }
 
+        if ($name == 'cache') {
+            var_dump('444 Cache.resolveFacadeInstance');
+            echo '<br/> ----------------';
+            //dd(static::$app['cache']);
+        }
+
+
+
         if (static::$app) {
             return static::$resolvedInstance[$name] = static::$app[$name];
         }
@@ -252,7 +260,18 @@ abstract class Facade
      */
     public static function __callStatic($method, $args)
     {
+        if ($method=='get' && @$args[0] == 'trueMe') {
+            var_dump('222. Cache.Facade.Parent call static', $method, $args);
+            echo '<br/> ----------------';
+        }
+
+
         $instance = static::getFacadeRoot();
+
+        if ($method=='get' && @$args[0] == 'trueMe') {
+            var_dump('555 Cache.Facade.Parent call static', get_class( $instance));
+            echo '<br/> ----------------';
+        }
 
         if (! $instance) {
             throw new RuntimeException('A facade root has not been set.');

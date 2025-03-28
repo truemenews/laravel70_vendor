@@ -34,6 +34,9 @@ class Cache extends Facade
      */
     protected static function getFacadeAccessor()
     {
+        var_dump('333. Cache.Facades');
+        echo '<br/> ----------------';
+
         return 'cache';
     }
 }

@@ -798,6 +798,9 @@ class Container implements ArrayAccess, ContainerContract
      */
     public function build($concrete)
     {
+        if ($concrete == 'log') {
+            dd(999, $this);
+        }
         // If the concrete type is actually a Closure, we will just execute it and
         // hand back the results of the functions, which allows functions to be
         // used as resolvers for more fine-tuned resolution of these objects.
@@ -1280,6 +1283,9 @@ class Container implements ArrayAccess, ContainerContract
      */
     public function offsetGet($key)
     {
+        if ($key=='log') {
+            //dd(444, 'array', $key);
+        }
         return $this->make($key);
     }
 
@@ -1316,6 +1322,9 @@ class Container implements ArrayAccess, ContainerContract
      */
     public function __get($key)
     {
+        if ($key=='log') {
+            dd(444, 'object', $key, $this[$key], $this);
+        }
         return $this[$key];
     }
 
@@ -1328,6 +1337,7 @@ class Container implements ArrayAccess, ContainerContract
      */
     public function __set($key, $value)
     {
+        dd(888, $key, $value);
         $this[$key] = $value;
     }
 }
