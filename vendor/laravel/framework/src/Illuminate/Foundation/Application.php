@@ -33,7 +33,7 @@ class Application extends Container implements ApplicationContract, CachesConfig
      *
      * @var string
      */
-    const VERSION = '7.30.7';
+    const VERSION = '7.30.6';
 
     /**
      * The base path for the Laravel installation.
@@ -557,9 +557,7 @@ class Application extends Container implements ApplicationContract, CachesConfig
      */
     public function detectEnvironment(Closure $callback)
     {
-        $args = $this->runningInConsole() && $_SERVER['argv']
-            ? $_SERVER['argv']
-            : null;
+        $args = $_SERVER['argv'] ?? null;
 
         return $this['env'] = (new EnvironmentDetector)->detect($callback, $args);
     }
@@ -1235,6 +1233,8 @@ class Application extends Container implements ApplicationContract, CachesConfig
      */
     public function registerCoreContainerAliases()
     {
+        var_dump('Cache.App.Alias 222');
+
         foreach ([
             'app'                  => [self::class, \Illuminate\Contracts\Container\Container::class, \Illuminate\Contracts\Foundation\Application::class, \Psr\Container\ContainerInterface::class],
             'auth'                 => [\Illuminate\Auth\AuthManager::class, \Illuminate\Contracts\Auth\Factory::class],

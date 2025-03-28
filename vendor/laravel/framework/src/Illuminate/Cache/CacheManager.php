@@ -44,6 +44,7 @@ class CacheManager implements FactoryContract
      */
     public function __construct($app)
     {
+        //var_dump('cache: 111');
         $this->app = $app;
     }
 
@@ -56,6 +57,8 @@ class CacheManager implements FactoryContract
     public function store($name = null)
     {
         $name = $name ?: $this->getDefaultDriver();
+
+        //dd(444, $name, $this->stores);
 
         return $this->stores[$name] = $this->get($name);
     }
@@ -79,6 +82,7 @@ class CacheManager implements FactoryContract
      */
     protected function get($name)
     {
+        //dd(111, $name);
         return $this->stores[$name] ?? $this->resolve($name);
     }
 
@@ -119,6 +123,7 @@ class CacheManager implements FactoryContract
      */
     protected function callCustomCreator(array $config)
     {
+        dd(999, $this->customCreators[$config['driver']]);
         return $this->customCreators[$config['driver']]($this->app, $config);
     }
 
@@ -380,6 +385,7 @@ class CacheManager implements FactoryContract
      */
     public function __call($method, $parameters)
     {
+        var_dump(333, $method, $parameters);
         return $this->store()->$method(...$parameters);
     }
 }

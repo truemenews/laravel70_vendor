@@ -240,7 +240,7 @@ class ConnectionFactory
         if ($this->container->bound($key = "db.connector.{$config['driver']}")) {
             return $this->container->make($key);
         }
-
+        var_dump(1, $config['driver']);
         switch ($config['driver']) {
             case 'mysql':
                 return new MySqlConnector;
